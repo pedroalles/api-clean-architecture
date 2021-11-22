@@ -1,18 +1,36 @@
+/* eslint max-classes-per-file: ["error", 3] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["route"] }] */
+
+class MissingParamError extends Error {
+  constructor(paramName) {
+    super(`Missing ${paramName}`);
+    this.name = 'MissingParamError';
+  }
+}
+
+class HttpResponse {
+  static badRequest(paramName) {
+    return {
+      statusCode: 400,
+      body: new MissingParamError(paramName),
+    };
+  }
+
+  static serverError() {
+    return {
+      statusCode: 500,
+    };
+  }
+}
+
 class LoginRouter {
   route(httpRequest) {
-    if (!httpRequest || !httpRequest.body) {
-      this.statusCode = 500;
-      return {
-        statusCode: this.statusCode,
-      };
-    }
+    if (!httpRequest || !httpRequest.body) return HttpResponse.serverError();
+
     const { email, password } = httpRequest.body;
-    if (!email || !password) {
-      this.statusCode = 400;
-      return {
-        statusCode: this.statusCode,
-      };
-    }
+    if (!email) return HttpResponse.badRequest('email');
+    if (!password) return HttpResponse.badRequest('password');
+
     return false;
   }
 }
@@ -27,6 +45,7 @@ describe('Login Router', () => {
     };
     const httpResponse = sut.route(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('email'));
   });
 
   test('Should return 400 if no password is provided', () => {
@@ -38,6 +57,7 @@ describe('Login Router', () => {
     };
     const httpResponse = sut.route(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('password'));
   });
 
   test('Should return 500 if no httpRequest is provided', () => {
