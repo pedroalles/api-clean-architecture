@@ -11,16 +11,6 @@
     "type": "git",
     "url": "git+https://github.com/pedroalles/api-clean-architecture.git"
   },
-  "lint-staged": {
-    "*.js": [
-      "npm run lint -- --fix"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
