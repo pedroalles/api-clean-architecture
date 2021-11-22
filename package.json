@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:staged": "jest",
     "lint": "eslint -c .eslintrc.json . --ext .js"
   },
   "repository": {
