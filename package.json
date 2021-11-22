@@ -4,11 +4,22 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint -c .eslintrc.json . --ext .js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pedroalles/api-clean-architecture.git"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run lint -- --fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "keywords": [],
   "author": "",
