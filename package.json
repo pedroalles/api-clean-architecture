@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "test:staged": "jest",
     "lint": "eslint -c .eslintrc.json . --ext .js"
   },
