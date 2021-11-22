@@ -9,7 +9,7 @@
         "plugin:jest/recommended"
     ],
     "parserOptions": {
-        "ecmaVersion": 13
+        "ecmaVersion": "latest"
     },
     "rules": {}
 }
