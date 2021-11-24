@@ -6,9 +6,9 @@
   "scripts": {
     "test": "jest --verbose --silent --colors --noStackTrace --passWithNoTests",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
-    "test:integration":"npm test -- --watch -c jest-integration-config.js",
+    "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
-    "test:ci":"npm test -- --coverage",
+    "test:ci": "npm test -- --coverage",
     "lint": "eslint -c .eslintrc.json . --ext .js"
   },
   "repository": {
@@ -31,5 +31,8 @@
     "husky": "^4.3.8",
     "jest": "^27.3.1",
     "lint-staged": "^12.1.2"
+  },
+  "dependencies": {
+    "validator": "^13.7.0"
   }
 }
