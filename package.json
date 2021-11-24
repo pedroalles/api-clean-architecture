@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --watchAll --silent --verbose --colors --noStackTrace",
     "test:staged": "jest --passWithNoTests --findRelatedTests --silent --noStackTrace",
+    "test:ci":"jest --coverage",
     "lint": "eslint -c .eslintrc.json . --ext .js"
   },
   "repository": {
