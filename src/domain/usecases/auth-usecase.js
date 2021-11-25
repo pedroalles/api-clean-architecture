@@ -24,7 +24,8 @@ module.exports = class AuthUseCase {
     }
     const user = await this.loadUserByEmailRepository.load(this.email);
     if (!user) return null;
-    await this.encrypter.compare(password, user.password);
+    const isValid = await this.encrypter.compare(password, user.password);
+    if (!isValid) return null;
     return null;
   }
 };
