@@ -1,31 +1,6 @@
 /* eslint max-classes-per-file: ["error", 4] */
+const AuthUseCase = require('./auth-usecase');
 const { MissingParamError, InvalidParamError } = require('../../utils/errors');
-
-class AuthUseCase {
-  constructor(loadUserByEmailRepository) {
-    this.loadUserByEmailRepository = loadUserByEmailRepository;
-  }
-
-  async auth(email, password) {
-    this.email = email;
-    this.password = password;
-    if (!this.email) {
-      throw new MissingParamError('email');
-    }
-    if (!this.password) {
-      throw new MissingParamError('password');
-    }
-    if (!this.loadUserByEmailRepository) {
-      throw new MissingParamError('loadUserByEmailRepository');
-    }
-    if (!this.loadUserByEmailRepository.load) {
-      throw new InvalidParamError('loadUserByEmailRepository');
-    }
-    const user = await this.loadUserByEmailRepository.load(this.email);
-    if (!user) return null;
-    return this.accessToken;
-  }
-}
 
 const makeSut = () => {
   class LoadUserByEmailRepositorySpy {
@@ -76,6 +51,6 @@ describe('Auth UseCase', () => {
   test('Should return null if LoadUserByEmailRepository returns null', async () => {
     const { sut } = makeSut();
     const accessToken = await sut.auth('invalid_email@mail.com', 'any_password');
-    await expect(accessToken).toBeNull();
+    expect(accessToken).toBeNull();
   });
 });
