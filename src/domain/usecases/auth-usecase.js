@@ -23,6 +23,6 @@ module.exports = class AuthUseCase {
     }
     const user = await this.loadUserByEmailRepository.load(this.email);
     if (!user) return null;
-    return this.accessToken;
+    return null;
   }
 };
